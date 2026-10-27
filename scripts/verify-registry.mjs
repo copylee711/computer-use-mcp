@@ -5,8 +5,8 @@ import { setTimeout as sleep } from 'node:timers/promises';
 const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 let metadata;
 // New npm publications can remain in processing for several minutes.
-for (let i = 0; i < 60; i++) {
-  const response = await fetch(`https://registry.npmjs.org/${pkg.name}/${pkg.version}`);
+for (let i = 0; i < 180; i++) {
+  const response = await fetch(`https://registry.npmjs.org/${pkg.name}/${pkg.version}`, { cache: 'no-store' });
   if (response.ok) { metadata = await response.json(); break; }
   if (response.status !== 404) throw new Error(`Registry returned ${response.status}`);
   await sleep(5000);
