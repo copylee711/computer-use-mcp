@@ -1,0 +1,27 @@
+{
+  "name": "@copylee/computer-use-mcp",
+  "version": "0.1.0",
+  "description": "Windows desktop automation MCP server: screenshots, mouse, keyboard, UI Automation and reusable app skills.",
+  "type": "module",
+  "bin": { "computer-use-mcp": "bin/computer-use-mcp.js" },
+  "exports": { ".": "./lib/server.js", "./package.json": "./package.json" },
+  "files": ["bin/", "lib/", "helper/", "skills/", "README.md", "NOTICE", "LICENSE"],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:integration": "node scripts/integration.mjs",
+    "test:desktop": "node scripts/integration.mjs --desktop",
+    "pack:check": "node scripts/check-package.mjs",
+    "prepack": "npm run build"
+  },
+  "engines": { "node": ">=22.19.0" },
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/copylee711/computer-use-mcp.git" },
+  "homepage": "https://github.com/copylee711/computer-use-mcp#readme",
+  "bugs": { "url": "https://github.com/copylee711/computer-use-mcp/issues" },
+  "keywords": ["mcp", "computer-use", "windows", "desktop-automation", "workbuddy", "ui-automation"],
+  "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
+  "dependencies": { "@modelcontextprotocol/sdk": "^1.32.2", "ajv": "^8.17.1" },
+  "devDependencies": { "@types/node": "^22.20.0", "typescript": "^6.0.3", "vitest": "^4.1.8" }
+}

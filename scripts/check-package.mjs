@@ -1,0 +1,11 @@
+import { execFileSync } from 'node:child_process';
+import assert from 'node:assert/strict';
+const npm = process.env.npm_execpath;
+assert.ok(npm, 'Run through npm run pack:check');
+const result = JSON.parse(execFileSync(process.execPath, [npm, 'pack', '--dry-run', '--ignore-scripts', '--json'], { encoding: 'utf8' }));
+const pack = Array.isArray(result) ? result[0] : result.files ? result : Object.values(result)[0];
+const files = pack.files.map(file => file.path);
+for (const file of ['bin/computer-use-mcp.js', 'lib/server.js', 'lib/cli.js', 'lib/helper-client.js', 'helper/CuHelper.cs', 'helper/host.ps1', 'skills/computer-use/SKILL.md', 'README.md', 'NOTICE', 'LICENSE']) assert.ok(files.includes(file), `Missing ${file}`);
+assert.ok(files.some(file => file.startsWith('helper/skills/')));
+for (const file of files) assert.ok(!/(^|\/)(node_modules|tests|scripts|\.qa|\.env|\.npmrc|\.git)(\/|$)/.test(file), `Private/development file: ${file}`);
+console.log(`Package verified: ${pack.name}@${pack.version}, ${files.length} files, ${pack.unpackedSize} unpacked bytes`);

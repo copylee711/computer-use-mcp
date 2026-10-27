@@ -1,0 +1,7 @@
+node_modules/
+lib/
+*.tgz
+.qa/
+coverage/
+.env
+.npmrc

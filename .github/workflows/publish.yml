@@ -1,0 +1,53 @@
+name: Publish to npm
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npm run test:integration
+      - run: npm run pack:check
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - run: npm install --global npm@latest
+      - name: Validate release version and branch
+        run: node scripts/validate-release.mjs
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npm run pack:check
+      - name: Publish using npm Trusted Publisher OIDC
+        run: npm publish --access public --provenance
+      - name: Verify registry tarball
+        run: node scripts/verify-registry.mjs

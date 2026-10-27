@@ -1,0 +1,6 @@
+Derived from the MIT-licensed dsh-computer-use plugin:
+https://github.com/copylee711/dsh-computer-use
+Source revision: e6272a61a7a03d2d3e6e1a1c384d20f30a23ffbc (0.8.0).
+Original copyright (c) 2026 Copy. See LICENSE.
+The desktop engine, Windows helper and built-in app notes are adapted for a
+standalone Model Context Protocol server without DSH dependencies.
