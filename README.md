@@ -75,7 +75,7 @@ npx -y @copylee/computer-use-mcp@0.1.0 --print-skill
 | --- | --- |
 | `COMPUTER_USE_ALLOWED_APPS` | 逗号分隔允许操控的应用；省略时允许所有非屏蔽应用；例如 `notepad,chrome` |
 | `COMPUTER_USE_BLOCKED_APPS` | 额外屏蔽应用，逗号分隔 |
-| `COMPUTER_USE_HOST_APPS` | 额外的宿主 exe 名称，防止向自己的聊天输入；默认保护 WorkBuddy/Codex/Claude/DSH |
+| `COMPUTER_USE_HOST_APPS` | 额外的宿主 exe 名称，防止向自己的聊天输入；默认保护 WorkBuddy/CodeBuddy/Codex/ChatGPT/Claude/DSH |
 | `COMPUTER_USE_LABEL` | 控制提示中的名称 |
 | `COMPUTER_USE_HOME` | 用户应用笔记的父目录 |
 

@@ -11,7 +11,7 @@ export interface WindowLike {
 }
 
 /** The MCP desktop host: the agent must never type into its own chat. */
-export const HOST_EXES = ['deepseek harness.exe', 'computer use mcp.exe', 'workbuddy.exe', 'codex.exe', 'claude.exe',
+export const HOST_EXES = ['deepseek harness.exe', 'computer use mcp.exe', 'workbuddy.exe', 'codex.exe', 'chatgpt.exe', 'codebuddy.exe', 'claude.exe',
   ...(process.env.COMPUTER_USE_HOST_APPS ?? '').split(',').map(name => name.trim().toLowerCase()).filter(Boolean)]
 
 /** Common Chinese / product names → executable base names. */

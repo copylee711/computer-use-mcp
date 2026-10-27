@@ -21,6 +21,12 @@ describe('app matching', () => {
 })
 
 describe('access control', () => {
+  it('protects common MCP client chat windows in allow-all mode', () => {
+    const access = new AccessControl()
+    for (const exe of ['WorkBuddy.exe', 'ChatGPT.exe', 'Codex.exe', 'Claude.exe', 'CodeBuddy.exe']) {
+      expect(access.denial('s1', { exe, title: 'chat' }, 'allow-all', [], 'type')).toContain('Refused')
+    }
+  })
   it('refuses ungranted apps in per-app mode and allows granted ones', () => {
     const access = new AccessControl()
     expect(access.denial('s1', chrome, 'per-app', [], 'click')).toMatch(/COMPUTER_USE_ALLOWED_APPS/)
